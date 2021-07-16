@@ -12,9 +12,10 @@
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="authentication/logout" Match="NavLinkMatch.All">
+            @*<NavLink class="nav-link" href="authentication/logout" Match="NavLinkMatch.All">
                 <span class="oi oi-account-logout" aria-hidden="true"></span> Log out
-            </NavLink>
+            </NavLink>*@
+            <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out not working</button>
         </li>
         @*<a href="authentication/profile">Hello, @context.User.Identity.Name!</a>
             <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>*@
@@ -38,7 +39,23 @@
 @code{
     private async Task BeginSignOut(MouseEventArgs args)
     {
-        await SignOutManager.SetSignOutState();
+        string logSnippet = "[LoginDisplay][BeginSignOut] =>";
+        Console.WriteLine($"{logSnippet} SignOutManager.SetSignOutState()");
+
+        try
+        {
+            await SignOutManager.SetSignOutState();
+        }
+        catch (Exception exc)
+        {
+
+            Console.WriteLine(exc.Message);
+            Console.WriteLine(exc.StackTrace);
+        }
+
+        Console.WriteLine($"{logSnippet} Returning from SignOutManager.SetSignOutState()");
+
+
         Navigation.NavigateTo("authentication/logout");
     }
 }
