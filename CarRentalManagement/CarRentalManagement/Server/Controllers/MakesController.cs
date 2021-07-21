@@ -35,7 +35,7 @@ namespace CarRentalManagement.Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMake(int id)
         {
-            var make = await _unitOfWork.Makes.Get(q => q.Id == id);
+            Make make = await _unitOfWork.Makes.Get(q => q.Id == id);
 
             if (make == null)
             {
