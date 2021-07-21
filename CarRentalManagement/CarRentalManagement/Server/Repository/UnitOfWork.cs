@@ -14,6 +14,7 @@ namespace CarRentalManagement.Server.Repository
     {
         private readonly ApplicationDbContext _context;
         private IGenericRepository<Make> _makes;
+        private IGenericRepository<Colour> _colours;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -21,6 +22,7 @@ namespace CarRentalManagement.Server.Repository
         }
 
         public IGenericRepository<Make> Makes => _makes ??= new GenericRepository<Make>(_context);
+        public IGenericRepository<Colour> Colours => _colours ??= new GenericRepository<Colour>(_context);
 
         public void Dispose()
         {
