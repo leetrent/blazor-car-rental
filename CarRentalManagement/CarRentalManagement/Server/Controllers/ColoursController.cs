@@ -24,7 +24,14 @@ namespace CarRentalManagement.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetColours()
         {
-            return Ok(await _unitOfWork.Colours.GetAll());
+            IList<Colour> colours = await _unitOfWork.Colours.GetAll();
+
+            if (colours == null || colours.Count < 1)
+            {
+                return NotFound();
+            }
+
+            return Ok(colours);
         }
 
         // GET: /Colours/5
@@ -72,11 +79,6 @@ namespace CarRentalManagement.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutColour(int id, Colour colour)
         {
-            string logSnippet = "[ColourController][PutColoe] =>";
-            Console.WriteLine($"{logSnippet} (id).........: '{id}'");
-            Console.WriteLine($"{logSnippet} (colour.Id)..: '{colour.Id}'");
-            Console.WriteLine($"{logSnippet} (colour.Name): '{colour.Name}'");
-
             if (id != colour.Id)
             {
                 return BadRequest();
