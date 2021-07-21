@@ -26,22 +26,22 @@ namespace CarRentalManagement.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetVehicles()
         {
-            var Vehicles = await _unitOfWork.Vehicles.GetAll();
-            return Ok(Vehicles);
+            var vehicles = await _unitOfWork.Vehicles.GetAll();
+            return Ok(vehicles);
         }
 
         // GET: /Vehicles/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            var Vehicle = await _unitOfWork.Vehicles.Get(q => q.Id == id);
+            var vehicle = await _unitOfWork.Vehicles.Get(q => q.Id == id);
 
-            if (Vehicle == null)
+            if (vehicle == null)
             {
                 return NotFound();
             }
 
-            return Ok(Vehicle);
+            return Ok(vehicle);
         }
 
         // PUT: api/Vehicles/5
@@ -90,8 +90,8 @@ namespace CarRentalManagement.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVehicle(int id)
         {
-            var Vehicle = await _unitOfWork.Vehicles.Get(q => q.Id == id);
-            if (Vehicle == null)
+            var vehicle = await _unitOfWork.Vehicles.Get(q => q.Id == id);
+            if (vehicle == null)
             {
                 return NotFound();
             }
@@ -103,8 +103,8 @@ namespace CarRentalManagement.Server.Controllers
 
         private async Task<bool> VehicleExists(int id)
         {
-            var Vehicle = await _unitOfWork.Vehicles.Get(q => q.Id == id);
-            return Vehicle == null;
+            var vehicle = await _unitOfWork.Vehicles.Get(q => q.Id == id);
+            return vehicle == null;
         }
     }
 }

@@ -27,8 +27,8 @@ namespace CarRentalManagement.Server.Controllers
         public async Task<IActionResult> GetBookings()
         {
             var includes = new List<string> { "Vehicle", "Customer" };
-            var Bookings = await _unitOfWork.Bookings.GetAll(includes: includes);
-            return Ok(Bookings);
+            var bookings = await _unitOfWork.Bookings.GetAll(includes: includes);
+            return Ok(bookings);
         }
 
         // GET: /Bookings/5
@@ -36,13 +36,13 @@ namespace CarRentalManagement.Server.Controllers
         public async Task<IActionResult> GetBooking(int id)
         {
             var includes = new List<string> { "Vehicle", "Customer" };
-            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id, includes);
-            if (Booking == null)
+            var booking = await _unitOfWork.Bookings.Get(q => q.Id == id, includes);
+            if (booking == null)
             {
                 return NotFound();
             }
 
-            return Ok(Booking);
+            return Ok(booking);
         }
 
         // PUT: api/Bookings/5
@@ -91,8 +91,8 @@ namespace CarRentalManagement.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBooking(int id)
         {
-            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
-            if (Booking == null)
+            var booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
+            if (booking == null)
             {
                 return NotFound();
             }
@@ -104,8 +104,8 @@ namespace CarRentalManagement.Server.Controllers
 
         private async Task<bool> BookingExists(int id)
         {
-            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
-            return Booking == null;
+            var booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
+            return booking == null;
         }
     }
 }
