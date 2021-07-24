@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using CarRentalManagement.Server.Data;
 using CarRentalManagement.Shared.Domain;
 using CarRentalManagement.Server.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarRentalManagement.Server.Controllers
 {
-    ////[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MakesController : ControllerBase
