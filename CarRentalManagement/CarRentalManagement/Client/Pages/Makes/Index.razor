@@ -1,6 +1,7 @@
 ﻿@page "/makes/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@attribute [Authorize]
 
 <h3 class="card-title">Car Makes</h3>
 <hr />
@@ -57,10 +58,8 @@ else
         var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {make.Name}?");
         if (confirm)
         {
-            //await _client.DeleteAsync($"{Endpoints.MakesEndpoint}/{makeId}");
-            await _client.DeleteAsync($"api/makes/{makeId}");
+            await _client.DeleteAsync($"{Endpoints.MakesEndpoint}/{makeId}");
             await OnInitializedAsync();
         }
-
     }
 }
