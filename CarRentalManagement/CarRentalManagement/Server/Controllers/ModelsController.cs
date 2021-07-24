@@ -1,16 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using CarRentalManagement.Server.IRepository;
 using CarRentalManagement.Shared.Domain;
-using CarRentalManagement.Server.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CarRentalManagement.Server.Controllers
 {
-    ////[Authorize]
-    [Route("[controller]")]
+    [Authorize]
+    [Route("api/[controller]")]
     [ApiController]
     public class ModelsController : ControllerBase
     {
@@ -21,7 +19,7 @@ namespace CarRentalManagement.Server.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: /Models
+        // GET: api/Models
         [HttpGet]
         public async Task<IActionResult> GetModels()
         {
@@ -31,10 +29,11 @@ namespace CarRentalManagement.Server.Controllers
             {
                 return NotFound();
             }
+
             return Ok(models);
         }
 
-        // GET: /Models/5
+        // GET: api/Models/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetModel(int id)
         {
@@ -48,38 +47,7 @@ namespace CarRentalManagement.Server.Controllers
             return Ok(model);
         }
 
-        // PUT: /Models/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutModel(int id, Model model)
-        {
-            if (id != model.Id)
-            {
-                return BadRequest();
-            }
-
-            _unitOfWork.Models.Update(model);
-
-            try
-            {
-                await _unitOfWork.Save(HttpContext);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!await ModelExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: /Models
+        // POST: api/Models
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Make>> PostModel(Model model)
@@ -87,7 +55,7 @@ namespace CarRentalManagement.Server.Controllers
             await _unitOfWork.Models.Insert(model);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetMake", new { id = model.Id }, model);
+            return CreatedAtAction("GetModel", new { id = model.Id }, model);
         }
 
         // DELETE: Models/5
@@ -106,10 +74,42 @@ namespace CarRentalManagement.Server.Controllers
             return NoContent();
         }
 
-        private async Task<bool> ModelExists(int id)
-        {
-            Model model = await _unitOfWork.Models.Get(q => q.Id == id);
-            return model == null;
-        }
+        // PUT: api/Models/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutModel(int id, Model model)
+        //{
+        //    if (id != model.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    _unitOfWork.Models.Update(model);
+
+        //    try
+        //    {
+        //        await _unitOfWork.Save(HttpContext);
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!await ModelExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
+
+        //private async Task<bool> ModelExists(int id)
+        //{
+        //    Model model = await _unitOfWork.Models.Get(q => q.Id == id);
+        //    return model == null;
+        //}
     }
 }
