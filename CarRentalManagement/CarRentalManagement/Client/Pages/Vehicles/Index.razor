@@ -59,12 +59,7 @@ else
     private List<Vehicle> Vehicles;
     protected async override Task OnInitializedAsync()
     {
-        Console.WriteLine("[Vehicles][OnInitializedAsync] => ");
-
         this.Vehicles = await _client.GetFromJsonAsync<List<Vehicle>>($"{Endpoints.VehiclesEndpoint}");
-
-        Console.WriteLine($"[Vehicles][OnInitializedAsync] => (this.Vehicles == null): {this.Vehicles == null}");
-        Console.WriteLine($"[Vehicles][OnInitializedAsync] => (this.Vehicles.Count)..: {this.Vehicles.Count}");
     }
 
     async Task Delete(int vehicleId)
