@@ -24,18 +24,8 @@ namespace CarRentalManagement.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetVehicles()
         {
-            Console.WriteLine($"[VehiclesController][GetVehicles] =>");
-
             List<string> includes = new List<string> { "Make", "Model", "Colour" };
             IList<Vehicle> vehicles = await _unitOfWork.Vehicles.GetAll(includes: includes);
-
-            Console.WriteLine($"[VehiclesController][GetVehicles] => (vehicles == null): {vehicles == null}");
-            Console.WriteLine($"[VehiclesController][GetVehicles] => (vehicles.Count)..: {vehicles.Count}");
-
-            //if (vehicles == null || vehicles.Count < 1)
-            //{
-            //    return NotFound();
-            //}
 
             return Ok(vehicles);
         }
