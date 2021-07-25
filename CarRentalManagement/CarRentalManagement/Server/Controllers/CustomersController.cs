@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using CarRentalManagement.Server.IRepository;
+using CarRentalManagement.Shared.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CarRentalManagement.Server.Data;
-using CarRentalManagement.Shared.Domain;
-using CarRentalManagement.Server.IRepository;
+using System.Threading.Tasks;
 
 namespace CarRentalManagement.Server.Controllers
 {
-    [Route("[controller]")]
+    [Authorize]
+    [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
@@ -22,7 +19,7 @@ namespace CarRentalManagement.Server.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: /Customers
+        // GET: api/Customers
         [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
@@ -30,7 +27,7 @@ namespace CarRentalManagement.Server.Controllers
             return Ok(customers);
         }
 
-        // GET: /Customers/5
+        // GET: api/Customers/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCustomer(int id)
         {
@@ -104,7 +101,7 @@ namespace CarRentalManagement.Server.Controllers
         private async Task<bool> CustomerExists(int id)
         {
             var customer = await _unitOfWork.Customers.Get(q => q.Id == id);
-            return customer == null;
+            return customer != null;
         }
     }
 }
