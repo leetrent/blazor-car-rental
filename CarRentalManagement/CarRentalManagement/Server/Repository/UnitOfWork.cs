@@ -51,6 +51,7 @@ namespace CarRentalManagement.Server.Repository
             {
                 ((BaseDomainModel)entry.Entity).DateUpdated = DateTime.Now;
                 ((BaseDomainModel)entry.Entity).UpdatedBy = user;
+
                 if (entry.State == EntityState.Added)
                 {
                     ((BaseDomainModel)entry.Entity).DateCreated = DateTime.Now;

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using CarRentalManagement.Server.IRepository;
+using CarRentalManagement.Shared.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CarRentalManagement.Server.Data;
-using CarRentalManagement.Shared.Domain;
-using CarRentalManagement.Server.IRepository;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CarRentalManagement.Server.Controllers
 {
-    [Route("[controller]")]
+    //[Authorize]
+    [Route("api/[controller]")]
     [ApiController]
     public class VehiclesController : ControllerBase
     {
@@ -22,19 +20,22 @@ namespace CarRentalManagement.Server.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: /Vehicles
+        // GET: api/Vehicles
         [HttpGet]
         public async Task<IActionResult> GetVehicles()
         {
-            var vehicles = await _unitOfWork.Vehicles.GetAll();
+            List<string> includes = new List<string> { "Make", "Model", "Colour" };
+            IList<Vehicle> vehicles = await _unitOfWork.Vehicles.GetAll(includes: includes);
+
             return Ok(vehicles);
         }
 
-        // GET: /Vehicles/5
+        // GET: api/Vehicles/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVehicle(int id)
         {
-            var vehicle = await _unitOfWork.Vehicles.Get(q => q.Id == id);
+            List<string> includes = new List<string> { "Make", "Model", "Colour", "Bookings" };
+            Vehicle vehicle = await _unitOfWork.Vehicles.Get(q => q.Id == id, includes);
 
             if (vehicle == null)
             {

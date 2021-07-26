@@ -1,15 +1,14 @@
 ﻿using CarRentalManagement.Server.IRepository;
 using CarRentalManagement.Shared.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarRentalManagement.Server.Controllers
 {
-    [Route("[controller]")]
+    [Authorize]
+    [Route("api/[controller]")]
     [ApiController]
     public class ColoursController : ControllerBase
     {
@@ -20,7 +19,7 @@ namespace CarRentalManagement.Server.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: /Colours
+        // GET: api/Colours
         [HttpGet]
         public async Task<IActionResult> GetColours()
         {
@@ -34,7 +33,7 @@ namespace CarRentalManagement.Server.Controllers
             return Ok(colours);
         }
 
-        // GET: /Colours/5
+        // GET: api/Colours/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetColour(int id)
         {
@@ -76,38 +75,38 @@ namespace CarRentalManagement.Server.Controllers
 
         // PUT: api/Colours/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutColour(int id, Colour colour)
-        {
-            if (id != colour.Id)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutColour(int id, Colour colour)
+        //{
+        //    if (id != colour.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _unitOfWork.Colours.Update(colour);
+        //    _unitOfWork.Colours.Update(colour);
 
-            try
-            {
-                await _unitOfWork.Save(HttpContext);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!await ColourExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _unitOfWork.Save(HttpContext);
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!await ColourExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
-        private async Task<bool> ColourExists(int id)
-        {
-            var Colour = await _unitOfWork.Colours.Get(q => q.Id == id);
-            return Colour == null;
-        }
+        //    return NoContent();
+        //}
+        //private async Task<bool> ColourExists(int id)
+        //{
+        //    var Colour = await _unitOfWork.Colours.Get(q => q.Id == id);
+        //    return Colour != null;
+        //}
     }
 }
