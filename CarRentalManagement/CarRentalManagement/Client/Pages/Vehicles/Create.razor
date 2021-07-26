@@ -8,11 +8,35 @@
 <br />
 
 <EditForm Model="@this.vehicle" OnValidSubmit="CreateVehicle">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
+    <div class="form-group">
+        <label>Make:</label>
+        <div>
+            <select class="form-control" @bind="vehicle.MakeId">
+                <option value="">-- Select Make --</option>
+                @if (this.Makes != null)
+                {
+                    foreach (Make make in this.Makes)
+                    {
+                        <option value="@make.Id">@make.Name</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
 </EditForm>
 
 @code {
     Vehicle vehicle = new Vehicle();
+
+    private IList<Make> Makes;
+
+    protected async override Task OnInitializedAsync()
+    {
+        this.Makes = await _client.GetFromJsonAsync<List<Make>>($"{Endpoints.MakesEndpoint}");
+    }
 
     private async Task CreateVehicle()
     {
