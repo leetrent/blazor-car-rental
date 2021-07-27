@@ -26,16 +26,34 @@
             </select>
         </div>
     </div>
+    <div class="form-group">
+        <label>Model:</label>
+        <div>
+            <select class="form-control" @bind="vehicle.ModelId">
+                <option value="">-- Select Model --</option>
+                @if (this.Models != null)
+                {
+                    foreach (Model model in this.Models)
+                    {
+                        <option value="@model.Id">@model.Name</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
 </EditForm>
 
 @code {
     Vehicle vehicle = new Vehicle();
 
     private IList<Make> Makes;
+    private IList<Model> Models;
 
     protected async override Task OnInitializedAsync()
     {
-        this.Makes = await _client.GetFromJsonAsync<List<Make>>($"{Endpoints.MakesEndpoint}");
+        this.Makes  = await _client.GetFromJsonAsync<List<Make>>($"{Endpoints.MakesEndpoint}");
+        this.Models = await _client.GetFromJsonAsync<List<Model>>($"{Endpoints.ModelsEndpoint}");
+
     }
 
     private async Task CreateVehicle()
