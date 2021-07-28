@@ -3,13 +3,13 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
-<h3 class="card-title">Colours</h3>
+<h3 class="card-title">Colours:</h3>
 <hr />
-<br />
-<a href="/colours/create" class="btn btn-primary">
+<a href="/colours/create" class="btn btn-primary mb-3">
     <span class="oi oi-plus"></span>
     Add New Colour
 </a>
+<br />
 
 @if (this.Colours == null)
 {
