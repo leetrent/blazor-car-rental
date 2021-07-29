@@ -3,16 +3,18 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
-<h3 class="card-title">Car Models</h3>
+<h3 class="card-title">Car Models:</h3>
 <hr />
-<br />
+<a href="/models/create" class="btn btn-primary mb-3">
+    <span class="oi oi-plus"></span>
+    Add New Model
+</a>
 
 @if (this.Models == null)
 {
-    <div cass="alert alert-info">Loaking Models...</div>
-}
-else
-{
+<div cass="alert alert-info">Loaking Models...</div> }
+            else
+            {
 <table class="table table-responsive">
     <thead>
         <tr>
@@ -23,42 +25,38 @@ else
     <tbody>
         @foreach (Model model in this.Models)
         {
-            <tr>
-                <td>@model.Name</td>
-                <td>
-                    <a href="/models/view/@model.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/models/edit/@model.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(model.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
-            </tr>
-        }
+<tr>
+    <td>@model.Name</td>
+    <td>
+        <a href="/models/view/@model.Id" class="btn btn-primary">
+            <span class="oi oi-book"></span>
+        </a>
+        <a href="/models/edit/@model.Id" class="btn btn-warning">
+            <span class="oi oi-pencil"></span>
+        </a>
+        <button class="btn btn-danger" @onclick="@(()=>Delete(model.Id))">
+            <span class="oi oi-delete"></span>
+        </button>
+    </td>
+</tr>}
 
     </tbody>
-</table>
-}
+</table>}
 
-@code {
-    private List<Model> Models;
+@code { private List<Model> Models;
 
-    protected async override Task OnInitializedAsync()
-    {
-        this.Models = await _client.GetFromJsonAsync<List<Model>>("api/models");
-    }
+            protected async override Task OnInitializedAsync()
+            {
+                this.Models = await _client.GetFromJsonAsync<List<Model>>("api/models");
+            }
 
-    async Task Delete(int modelId)
-    {
-        Model model = this.Models.First(q => q.Id == modelId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to delete car model '{model.Name}'?");
-        if (confirm)
-        {
-            await _client.DeleteAsync($"{Endpoints.ModelsEndpoint}/{modelId}");
-            await OnInitializedAsync();
-        }
-    }
-}
+            async Task Delete(int modelId)
+            {
+                Model model = this.Models.First(q => q.Id == modelId);
+                var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to delete car model '{model.Name}'?");
+                if (confirm)
+                {
+                    await _client.DeleteAsync($"{Endpoints.ModelsEndpoint}/{modelId}");
+                    await OnInitializedAsync();
+                }
+            } }

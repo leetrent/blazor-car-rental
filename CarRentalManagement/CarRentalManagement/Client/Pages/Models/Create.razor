@@ -1,0 +1,32 @@
+﻿@page "/models/create/"
+
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Add New Model:</h3>
+<hr />
+<br />
+
+<EditForm Model="@this.newModel" OnValidSubmit="CreateModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>Model Name:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@newModel.Name" />
+            <ValidationMessage For="@(() => newModel.Name)" />
+
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Add Model</button>
+</EditForm>
+
+@code {
+    Model newModel = new Model();
+
+    private async Task CreateModel()
+    {
+        await _client.PostAsJsonAsync(Endpoints.ModelsEndpoint, newModel);
+        _navManager.NavigateTo("/models/");
+    }
+}
