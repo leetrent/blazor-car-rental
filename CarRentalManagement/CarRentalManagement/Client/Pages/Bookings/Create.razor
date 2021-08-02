@@ -8,7 +8,7 @@
     <ValidationSummary />
 
     <div class="form-group">
-        <label>Make:</label>
+        <label>Vehcile:</label>
         <div>
             <select class="form-control" @bind="newBooking.VehicleId">
                 <option value="">-- Select Make --</option>
@@ -21,6 +21,22 @@
                 }
             </select>
             <ValidationMessage For="@(() => newBooking.VehicleId)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Customer:</label>
+        <div>
+            <select class="form-control" @bind="newBooking.CustomerId">
+                <option value="">-- Select Customer --</option>
+                @if (this.Customers != null)
+                {
+                    foreach (Customer customer in this.Customers)
+                    {
+                        <option value="@customer.Id">@customer.TaxId | @customer.EmailAddress</option>
+                    }
+                }
+            </select>
+            <ValidationMessage For="@(() => newBooking.CustomerId)" />
         </div>
     </div>
 </EditForm>
