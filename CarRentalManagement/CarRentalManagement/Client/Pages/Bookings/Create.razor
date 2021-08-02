@@ -39,6 +39,14 @@
             <ValidationMessage For="@(() => newBooking.CustomerId)" />
         </div>
     </div>
+    <div class="form-group">
+        <label>Data Out:</label>
+        <div>
+            <InputDate @bind-Value="@newBooking.DateOut" class="form-control" />
+            <ValidationMessage For="@(() => newBooking.DateOut)" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Add Booking</button>
 </EditForm>
 
     @code {
