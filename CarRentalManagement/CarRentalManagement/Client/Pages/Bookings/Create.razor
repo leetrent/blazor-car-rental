@@ -1,0 +1,50 @@
+﻿@page "/bookings/create/"
+
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<EditForm Model="@this.newBooking" OnValidSubmit="CreateBooking">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Make:</label>
+        <div>
+            <select class="form-control" @bind="newBooking.VehicleId">
+                <option value="">-- Select Make --</option>
+                @if (this.Vehicles != null)
+                {
+                    foreach (Vehicle vehicle in this.Vehicles)
+                    {
+                        <option value="@vehicle.Id">@vehicle.Make.Name @vehicle.Model.Name | @vehicle.LicensePlateNumber</option>
+                    }
+                }
+            </select>
+            <ValidationMessage For="@(() => newBooking.VehicleId)" />
+        </div>
+    </div>
+</EditForm>
+
+    @code {
+
+        Booking newBooking = new Booking
+        {
+            DateOut = DateTime.Now.Date
+        };
+
+        private IList<Vehicle> Vehicles;
+        private IList<Customer> Customers;
+
+        protected async override Task OnInitializedAsync()
+        {
+            this.Vehicles = await _client.GetFromJsonAsync<IList<Vehicle>>(Endpoints.VehiclesEndpoint);
+            this.Customers = await _client.GetFromJsonAsync<IList<Customer>>(Endpoints.CustomersEndpoint);
+        }
+
+
+        private async Task CreateBooking()
+        {
+            await _client.PostAsJsonAsync(Endpoints.BookingsEndpoint, newBooking);
+            _navManager.NavigateTo("/bookings/");
+        }
+    }
