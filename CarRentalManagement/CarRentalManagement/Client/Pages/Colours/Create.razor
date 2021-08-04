@@ -1,0 +1,32 @@
+﻿@page "/colours/create/"
+
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Add New Colour</h3>
+<hr />
+<br />
+
+<EditForm Model="@this.newColour" OnValidSubmit="CreateColour">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>Colour Name:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@newColour.Name" />
+            <ValidationMessage For="@(() => newColour.Name)" />
+
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Add Colour</button>
+</EditForm>
+
+@code {
+    Colour newColour = new Colour();
+
+    private async Task CreateColour()
+    {
+        await _client.PostAsJsonAsync(Endpoints.ColoursEndpoint, newColour);
+        _navManager.NavigateTo("/colours/");
+    }
+}
