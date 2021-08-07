@@ -2,6 +2,7 @@
 using CarRentalManagement.Shared.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -76,40 +77,40 @@ namespace CarRentalManagement.Server.Controllers
 
         // PUT: api/Models/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutModel(int id, Model model)
-        //{
-        //    if (id != model.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutModel(int id, Model model)
+        {
+            if (id != model.Id)
+            {
+                return BadRequest();
+            }
 
-        //    _unitOfWork.Models.Update(model);
+            _unitOfWork.Models.Update(model);
 
-        //    try
-        //    {
-        //        await _unitOfWork.Save(HttpContext);
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!await ModelExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await _unitOfWork.Save(HttpContext);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await ModelExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
 
-        //private async Task<bool> ModelExists(int id)
-        //{
-        //    Model model = await _unitOfWork.Models.Get(q => q.Id == id);
-        //    return model == null;
-        //}
+        private async Task<bool> ModelExists(int id)
+        {
+            Model model = await _unitOfWork.Models.Get(q => q.Id == id);
+            return model != null;
+        }
     }
 }
