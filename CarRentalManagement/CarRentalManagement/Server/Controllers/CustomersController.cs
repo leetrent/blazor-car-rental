@@ -3,6 +3,7 @@ using CarRentalManagement.Shared.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace CarRentalManagement.Server.Controllers
@@ -46,6 +47,9 @@ namespace CarRentalManagement.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer Customer)
         {
+            string logSnippet = ("[CustomersController][PutCustomer] =>");
+            Console.WriteLine($"{logSnippet} (id): '{id}'");
+
             if (id != Customer.Id)
             {
                 return BadRequest();
