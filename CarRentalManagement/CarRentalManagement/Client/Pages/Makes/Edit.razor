@@ -3,7 +3,11 @@
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
-<FormComponent ButtonText="Update" OnValidSubmit="@EditMake" make="this.make" />
+<h3 class="card-title">Edit Make:</h3>
+<hr />
+<br />
+
+<FormComponent ButtonText="Update Make" OnValidSubmit="@EditMake" make="this.make" />
 
 @code {
     [Parameter] public int id { get; set; }
