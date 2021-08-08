@@ -13,8 +13,7 @@
                 {
                     foreach (Make make in this.Makes)
                     {
-                        <option value="@make.Id">@make.Name</option>
-                    }
+<option value="@make.Id">@make.Name</option>                    }
                 }
             </select>
             <ValidationMessage For="@(() => vehicle.MakeId)" />
@@ -29,9 +28,8 @@
                 {
                     foreach (Model model in this.Models)
                     {
-                        <option value="@model.Id">@model.Name</option>
+<option value="@model.Id">@model.Name</option>}
                     }
-                }
             </InputSelect>
             <ValidationMessage For="@(() => vehicle.ModelId)" />
         </div>
@@ -45,8 +43,7 @@
                 {
                     foreach (Colour colour in this.Colours)
                     {
-                        <option value="@colour.Id">@colour.Name</option>
-                    }
+<option value="@colour.Id">@colour.Name</option>                    }
                 }
             </select>
             <ValidationMessage For="@(() => vehicle.ColourId)" />
@@ -84,6 +81,7 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary btn-block">Add Vehicle</button>
+    <BackToList Target="vehicles" />
 </EditForm>
 
 

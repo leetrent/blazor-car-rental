@@ -7,17 +7,10 @@
 
     @code {
 
-        Booking newBooking;
-
-
-        protected async override Task OnInitializedAsync()
+        Booking newBooking = new Booking
         {
-            this.newBooking = new Booking
-            {
-                DateOut = DateTime.Now.Date
-            };
-        }
-
+            DateOut = DateTime.Now.Date
+        };
 
         private async Task CreateBooking()
         {
