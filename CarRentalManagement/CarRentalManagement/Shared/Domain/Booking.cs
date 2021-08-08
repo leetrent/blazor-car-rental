@@ -8,7 +8,7 @@ namespace CarRentalManagement.Shared.Domain
         public virtual Vehicle Vehicle { get; set; }
 
         public DateTime DateOut { get; set; }
-        public DateTime DateIn { get; set; }
+        public DateTime? DateIn { get; set; }
 
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
