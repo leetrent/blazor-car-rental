@@ -48,14 +48,19 @@ namespace CarRentalManagement.Server.Controllers
         // PUT: api/Bookings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBooking(int id, Booking Booking)
+        public async Task<IActionResult> PutBooking(int id, Booking booking)
         {
-            if (id != Booking.Id)
+            string logSnippet = "[BookingsController][PutBooking] =>";
+            Console.WriteLine($"{logSnippet} (id)........: '{id}'");
+            Console.WriteLine($"{logSnippet} (booking.Id): '{booking.Id}'");
+            Console.WriteLine($"{logSnippet} (booking.IdCustomerId '{booking.CustomerId}'");
+
+            if (id != booking.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Bookings.Update(Booking);
+            _unitOfWork.Bookings.Update(booking);
 
             try
             {
@@ -105,7 +110,7 @@ namespace CarRentalManagement.Server.Controllers
         private async Task<bool> BookingExists(int id)
         {
             var booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
-            return booking == null;
+            return booking != null;
         }
     }
 }
