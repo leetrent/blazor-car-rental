@@ -77,39 +77,39 @@ namespace CarRentalManagement.Server.Controllers
 
         // PUT: api/Makes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutMake(int id, Make make)
-        //{
-        //    if (id != make.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutMake(int id, Make make)
+        {
+            if (id != make.Id)
+            {
+                return BadRequest();
+            }
 
-        //    _unitOfWork.Makes.Update(make);
+            _unitOfWork.Makes.Update(make);
 
-        //    try
-        //    {
-        //        await _unitOfWork.Save(HttpContext);
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!await MakeExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await _unitOfWork.Save(HttpContext);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await MakeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //private async Task<bool> MakeExists(int id)
-        //{
-        //    var make = await _unitOfWork.Makes.Get(q => q.Id == id);
-        //    return make != null;
-        //}
+        private async Task<bool> MakeExists(int id)
+        {
+            var make = await _unitOfWork.Makes.Get(q => q.Id == id);
+            return make != null;
+        }
     }
 }

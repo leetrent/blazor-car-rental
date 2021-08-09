@@ -28,25 +28,25 @@
     <tbody>
         @foreach (Booking booking in Bookings)
         {
-<tr>
-    <td>@booking.Customer.TaxId</td>
-    <td>@booking.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-    <td>
-        @(booking.DateIn - booking.DateOut).TotalDays.ToString()
-    </td>
-    <td>
-        <a href="/bookings/view/@booking.Id" class="btn btn-primary">
-            <span class="oi oi-book"></span>
-        </a>
-        <a href="/bookings/edit/@booking.Id" class="btn btn-warning">
-            <span class="oi oi-pencil"></span>
-        </a>
-        <button class="btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
-            <span class="oi oi-delete"></span>
-        </button>
+        <tr>
+            <td>@booking.Customer.TaxId</td>
+            <td>@booking.DateCreated.Date.ToString("dd MMMM yyyy")</td>
+            <td>
+                @(booking.DateIn != null ? (booking.DateIn.Value - booking.DateOut).TotalDays.ToString() : "To Be Determined")
+            </td>
+            <td>
+                <a href="/bookings/view/@booking.Id" class="btn btn-primary">
+                    <span class="oi oi-book"></span>
+                </a>
+                <a href="/bookings/edit/@booking.Id" class="btn btn-warning">
+                    <span class="oi oi-pencil"></span>
+                </a>
+                <button class="btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
+                    <span class="oi oi-delete"></span>
+                </button>
 
-    </td>
-</tr>}
+            </td>
+        </tr>}
     </tbody>
 </table>}
 

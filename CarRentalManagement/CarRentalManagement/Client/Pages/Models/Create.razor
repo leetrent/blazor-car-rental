@@ -7,19 +7,7 @@
 <hr />
 <br />
 
-<EditForm Model="@this.newModel" OnValidSubmit="CreateModel">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="form-group">
-        <label>Model Name:</label>
-        <div>
-            <InputText class="form-control" @bind-Value="@newModel.Name" />
-            <ValidationMessage For="@(() => newModel.Name)" />
-
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">Add Model</button>
-</EditForm>
+<FormComponent ButtonText="Add Model" OnValidSubmit="@CreateModel" model="this.newModel" />
 
 @code {
     Model newModel = new Model();
