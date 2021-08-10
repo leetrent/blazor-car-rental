@@ -84,12 +84,16 @@ namespace CarRentalManagement.Server.Controllers
         // POST: api/Bookings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Booking>> PostBooking(Booking Booking)
+        public async Task<ActionResult<Booking>> PostBooking(Booking booking)
         {
-            await _unitOfWork.Bookings.Insert(Booking);
+            string logSnippet = "[BookingsController][PostBooking] =>";
+            Console.WriteLine($"{logSnippet} (booking.VehicleId).: '{booking.VehicleId}'");
+            Console.WriteLine($"{logSnippet} (booking.CustomerId): '{booking.CustomerId}'");
+
+            await _unitOfWork.Bookings.Insert(booking);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetBooking", new { id = Booking.Id }, Booking);
+            return CreatedAtAction("GetBooking", new { id = booking.Id }, booking);
         }
 
         // DELETE: api/Bookings/5
