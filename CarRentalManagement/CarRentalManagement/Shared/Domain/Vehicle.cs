@@ -8,7 +8,7 @@ namespace CarRentalManagement.Shared.Domain
     {
         [Required(ErrorMessage = "Please enter model year.")]
         [Range(2000, 2100, ErrorMessage = "Please enter a year between 2000 and 2100.")]
-        public int Year { get; set; }
+        public int? Year { get; set; }
 
         [Required]
         [Range(1, 2147483647, ErrorMessage = "Please select a model.")]
@@ -33,8 +33,9 @@ namespace CarRentalManagement.Shared.Domain
         [StringLength(16, MinimumLength = 6, ErrorMessage = "License plate number must contain at least 6 alpha-numeric characters.")]
         public string LicensePlateNumber { get; set; }
 
-        [Required]
-        public double RentalRate { get; set; }
+        [Required(ErrorMessage = "Please enter rental rate.")]
+        [Range(25.00, 999.99, ErrorMessage = "Please enter a retnal rate between $25.00 and $999.99.")]
+        public double? RentalRate { get; set; }
 
         public virtual List<Booking> Bookings { get; set; }
     }
