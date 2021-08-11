@@ -6,12 +6,17 @@ namespace CarRentalManagement.Shared.Domain
 {
     public class Booking : BaseDomainModel, IValidatableObject
     {
+        [Required]
+        [Range(1, 2147483647,  ErrorMessage = "Please select a vehicle.")]
         public int VehicleId { get; set; }
         public virtual Vehicle Vehicle { get; set; }
 
+        [Required(ErrorMessage = "Please select a date out.")]
         public DateTime DateOut { get; set; }
         public DateTime? DateIn { get; set; }
 
+        [Required]
+        [Range(1, 2147483647, ErrorMessage = "Please select a customer.")]
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 

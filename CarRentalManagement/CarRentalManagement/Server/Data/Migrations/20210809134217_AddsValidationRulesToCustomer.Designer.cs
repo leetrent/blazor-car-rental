@@ -4,14 +4,16 @@ using CarRentalManagement.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRentalManagement.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210809134217_AddsValidationRulesToCustomer")]
+    partial class AddsValidationRulesToCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +96,7 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "863034a5-ba25-46e0-bf98-8bffc53b75d2",
+                            ConcurrencyStamp = "6444430b-895e-4a06-86ac-4ee89c0e99a6",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "System",
@@ -102,9 +104,9 @@ namespace CarRentalManagement.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFCzyvdLuboQ9BrWyYWyiRW+N7L4SalQMKlr7gYdlj7Ub7h5hnHtMHmWVvdglYrfBA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENLwGGsnpw1HmItLeRuVATc5keI8AbWVFc4jG7Hn9FzmXkW57SzTotYOGVNlVzepdw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "869342fd-dd3b-4c8e-8868-e5a6f0b8c46d",
+                            SecurityStamp = "2ad4eb12-6277-498a-88bf-ada31ad4ffc4",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -112,7 +114,7 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0074ecd-6984-48e8-a59a-c15dab3e5274",
+                            ConcurrencyStamp = "ee6c1cda-17a9-495c-8cef-a7897f15d4fe",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "System",
@@ -120,9 +122,9 @@ namespace CarRentalManagement.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHCgSJYWM3NL4uRaMPH98ZNIjBl3Lo5ke2O/cW/7I0vLU5DbO28prwtdXgT0h8WAgA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPpXzCoyXT5qBO3tvi/acyEbsVG9zhx0KM8BV5gamClorY9nrxutETn/JhutoQSnmg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1f0be33d-6e8a-4462-bb76-131e0617f597",
+                            SecurityStamp = "587fc12e-9fd5-4eae-8fbe-69f9c5fd09f4",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });
@@ -185,9 +187,7 @@ namespace CarRentalManagement.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -201,8 +201,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 423, DateTimeKind.Local).AddTicks(5588),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 430, DateTimeKind.Local).AddTicks(6125),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 489, DateTimeKind.Local).AddTicks(4788),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 491, DateTimeKind.Local).AddTicks(9034),
                             Name = "Black",
                             UpdatedBy = "System"
                         },
@@ -210,8 +210,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 431, DateTimeKind.Local).AddTicks(644),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 431, DateTimeKind.Local).AddTicks(684),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 492, DateTimeKind.Local).AddTicks(565),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 492, DateTimeKind.Local).AddTicks(577),
                             Name = "White",
                             UpdatedBy = "System"
                         },
@@ -219,8 +219,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 431, DateTimeKind.Local).AddTicks(694),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 431, DateTimeKind.Local).AddTicks(700),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 492, DateTimeKind.Local).AddTicks(581),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 492, DateTimeKind.Local).AddTicks(583),
                             Name = "Blue",
                             UpdatedBy = "System"
                         },
@@ -228,8 +228,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 431, DateTimeKind.Local).AddTicks(708),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 431, DateTimeKind.Local).AddTicks(714),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 492, DateTimeKind.Local).AddTicks(586),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 492, DateTimeKind.Local).AddTicks(588),
                             Name = "Green",
                             UpdatedBy = "System"
                         },
@@ -237,8 +237,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 431, DateTimeKind.Local).AddTicks(721),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 431, DateTimeKind.Local).AddTicks(727),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 492, DateTimeKind.Local).AddTicks(590),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 492, DateTimeKind.Local).AddTicks(592),
                             Name = "Red",
                             UpdatedBy = "System"
                         });
@@ -311,9 +311,7 @@ namespace CarRentalManagement.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -327,8 +325,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(7550),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(7639),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5035),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5053),
                             Name = "Chevrolet",
                             UpdatedBy = "System"
                         },
@@ -336,8 +334,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9334),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9361),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5571),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5580),
                             Name = "Ford",
                             UpdatedBy = "System"
                         },
@@ -345,8 +343,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9370),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9377),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5583),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5586),
                             Name = "Dodge",
                             UpdatedBy = "System"
                         },
@@ -354,8 +352,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9384),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9390),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5588),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5590),
                             Name = "Toyota",
                             UpdatedBy = "System"
                         },
@@ -363,8 +361,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9398),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9404),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5593),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5595),
                             Name = "Honda",
                             UpdatedBy = "System"
                         },
@@ -372,8 +370,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9411),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 437, DateTimeKind.Local).AddTicks(9417),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5597),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(5599),
                             Name = "Nissan",
                             UpdatedBy = "System"
                         });
@@ -396,9 +394,7 @@ namespace CarRentalManagement.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -412,8 +408,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(1613),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(1654),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(9800),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 493, DateTimeKind.Local).AddTicks(9814),
                             Name = "Malibu",
                             UpdatedBy = "System"
                         },
@@ -421,8 +417,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3090),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3117),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(318),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(327),
                             Name = "Fusion",
                             UpdatedBy = "System"
                         },
@@ -430,8 +426,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3127),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3133),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(331),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(333),
                             Name = "Charger",
                             UpdatedBy = "System"
                         },
@@ -439,8 +435,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3140),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3147),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(335),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(337),
                             Name = "Camry",
                             UpdatedBy = "System"
                         },
@@ -448,8 +444,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3154),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3160),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(340),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(342),
                             Name = "Accord",
                             UpdatedBy = "System"
                         },
@@ -457,8 +453,8 @@ namespace CarRentalManagement.Server.Data.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3167),
-                            DateUpdated = new DateTime(2021, 8, 10, 21, 3, 38, 439, DateTimeKind.Local).AddTicks(3173),
+                            DateCreated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(345),
+                            DateUpdated = new DateTime(2021, 8, 9, 8, 42, 16, 494, DateTimeKind.Local).AddTicks(347),
                             Name = "Altima",
                             UpdatedBy = "System"
                         });
@@ -484,9 +480,7 @@ namespace CarRentalManagement.Server.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LicensePlateNumber")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MakeId")
                         .HasColumnType("int");
@@ -501,9 +495,7 @@ namespace CarRentalManagement.Server.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Vin")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -652,14 +644,14 @@ namespace CarRentalManagement.Server.Data.Migrations
                         new
                         {
                             Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
-                            ConcurrencyStamp = "57160ab9-ffb8-4302-b5a1-28d63c1fb947",
+                            ConcurrencyStamp = "c5cf575d-8236-4d3b-9362-b99157d2ada0",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf",
-                            ConcurrencyStamp = "fddfe961-aa89-4b9a-ad5c-7bfadbf3bb27",
+                            ConcurrencyStamp = "1f9ad2a8-2b0d-41af-b48d-0eb4f520728a",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
