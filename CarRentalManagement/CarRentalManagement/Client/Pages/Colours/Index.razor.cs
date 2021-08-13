@@ -1,4 +1,5 @@
-﻿using CarRentalManagement.Client.Static;
+﻿using CarRentalManagement.Client.Services;
+using CarRentalManagement.Client.Static;
 using CarRentalManagement.Shared.Domain;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -11,27 +12,36 @@ using System.Threading.Tasks;
 
 namespace CarRentalManagement.Client.Pages.Colours
 {
-    public partial class Index
+    public partial class Index : IDisposable
     {
         [Inject] HttpClient _client { get; set; }
         [Inject] IJSRuntime js { get; set; }
+        [Inject] HttpInterceptorService _interceptor { get; set; }
 
         private List<Colour> Colours;
+
         protected async override Task OnInitializedAsync()
         {
-            Console.WriteLine("[Colours][OnInitializedAsync] => (In code behind)");
-            this.Colours = await _client.GetFromJsonAsync<List<Colour>>("api/colours");
+            _interceptor.MonitorEvent();
+            Colours = await _client.GetFromJsonAsync<List<Colour>>($"{Endpoints.ColoursEndpoint}");
         }
 
         async Task Delete(int colourId)
         {
-            Colour colour = this.Colours.First(q => q.Id == colourId);
-            var confirm = await js.InvokeAsync<bool>("confirm", $"Are you sure you want to delete colour '{colour.Name}'?");
+            var colour = Colours.First(q => q.Id == colourId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {colour.Name}?");
             if (confirm)
             {
+                _interceptor.MonitorEvent();
                 await _client.DeleteAsync($"{Endpoints.ColoursEndpoint}/{colourId}");
                 await OnInitializedAsync();
             }
+
+        }
+
+        public void Dispose()
+        {
+            _interceptor.DisposeEvent();
         }
     }
 }
