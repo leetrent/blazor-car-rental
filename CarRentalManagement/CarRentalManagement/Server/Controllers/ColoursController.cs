@@ -24,7 +24,7 @@ namespace CarRentalManagement.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetColours()
         {
-            return NotFound();
+            //return NotFound();
 
             IList<Colour> colours = await _unitOfWork.Colours.GetAll();
 
